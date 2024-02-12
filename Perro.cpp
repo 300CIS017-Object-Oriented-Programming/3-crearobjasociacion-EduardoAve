@@ -1,6 +1,6 @@
 #include "Perro.h"
 #include <iostream>
-
+using namespace std;
 
 // Ejemplo de constructor por defecto con lista inicializadora
 // Perro::Perro() : edad(0), raza(""), tamanio(""), color("") {}
@@ -11,23 +11,43 @@ Perro::Perro() {
     this->raza = "";
     this->tamanio = "";
     this->color = "";
+    this->nombre = "";
 }
+
+Perro::Perro(int edad, string nombre, string raza, string tamanio, string color): edad(edad) , nombre(nombre), raza(raza), tamanio(tamanio),color(color){}
 
 void Perro::ladrar() {
     std::cout << "Guau Guau" << std::endl;
 }
 
-void Perro::agregarPropietario(std::string nombre, std::string docIdentidad) {
+void Perro::agregarPropietario(string nombre, string docIdentidad) {
     // Asocia a la variable de instancia pPropietario un nuevo pPropietario
     // Es memoria dinámica, en el destructor se debe liberar
     this->pPropietario = new Propietario(nombre, docIdentidad);
 }
 
+void Perro::asignarVeterinario(string nombre, int aniosExperiencia) {
+    this-> pVeterinario = new Veterinario(nombre, aniosExperiencia);
+}
+
 void Perro::setPropietario(Propietario *pPropietario) {
     this->pPropietario = pPropietario;
 }
+
+void Perro::asignarRaza(Raza* raza) {
+    pRaza = raza;
+}
+
 Propietario *Perro::getPropietario() {
     return this->pPropietario;
+}
+
+Veterinario* Perro::getVeterinario() {
+    return this->pVeterinario;
+}
+
+Raza * Perro::getRaza(){
+    return this->pRaza;
 }
 
 int Perro::getEdad() {
@@ -38,9 +58,6 @@ void Perro::setEdad(int edad) {
     this->edad = edad;
 }
 
-std::string Perro::getRaza() {
-    return raza;
-}
 
 void Perro::setRaza(std::string raza) {
     this->raza = raza;
